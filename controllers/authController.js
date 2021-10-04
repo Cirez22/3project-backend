@@ -9,7 +9,6 @@ const getAllUsers = async (req, res) => {
     if (users.length === 0) {
      return res.status(400).json({message: "No users found"}); 
     }
-    console.log("CODE REACHED")
     return res.status(200).json(users);
   } catch (error) {
     console.log(error)
