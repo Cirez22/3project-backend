@@ -1,7 +1,7 @@
 const PostModel = require('../models/PostModel')
 
 exports.getAllPost = async (req, res) => {
-    const posts = await PostModel.find()
+    const posts = await PostModel.find().populate("user")
 
 
 try {
@@ -35,8 +35,8 @@ exports.createPost = async (req, res) => {
 }
 
 exports.updatePost = async (req, res) => {
-    const { _id } = req.params;
-    const postToUpdate = await PostModel.findByIdAndUpdate(_id, req.body, { new: true });
+    const { id } = req.params;
+    const postToUpdate = await PostModel.findByIdAndUpdate(id, req.body, { new: true });
     try {
         return res.status(202).json(postToUpdate);
     } catch (error) {
@@ -45,8 +45,8 @@ exports.updatePost = async (req, res) => {
 }
 
 exports.deletePost = async (req, res) => {
-    const { _id } = req.params;
-    const postToDelete = await PostModel.findByIdAndDelete(_id);
+    const { id } = req.params;
+    const postToDelete = await PostModel.findByIdAndDelete(id);
     try {
         return res.status(203).json({ message: "Succesfully Deleted" })
     } catch (error) {

@@ -9,8 +9,19 @@ const PostSchema = Schema (
         description:{
             type: String,
             require: true
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref:"User"
+        },
+        bid:{
+            type: Number
+        },
+        accepted:{
+            type: Boolean,
+            default: false
         }
-        
+       
     }
 );
 
