@@ -37,7 +37,8 @@ const signUpUser = async (req, res) => {
     const salt = bcrypt.genSaltSync();
     user.password = bcrypt.hashSync(req.body.password, salt);
     user.save();
-    return res.status(201).json(user);
+    const token = await generateJwt(user._id);
+    return res.status(201).json({user,token});
   } catch (error) {
     return res.status(500).json({message: "Couldn't create the user"});
   }
